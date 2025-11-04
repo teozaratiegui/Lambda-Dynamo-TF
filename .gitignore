@@ -1,0 +1,55 @@
+# --- Terraform ---
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# variable files (usually secret/config)
+terraform.tfvars
+*.tfvars
+*.tfvars.json
+
+# override files (local customizations)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# plans
+*.plan
+terraform.tfplan
+
+# local CLI config (if present)
+.terraformrc
+terraform.rc
+
+# --- Lambda / build artifacts ---
+**/build/
+*.zip
+
+# If you bundle node lambdas locally:
+**/node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Keep lockfiles if you have Node code (recommended):
+#!package-lock.json
+#!yarn.lock
+#!pnpm-lock.yaml
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# env files
+.env
+.env.*
