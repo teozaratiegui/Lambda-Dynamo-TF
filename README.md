@@ -32,7 +32,7 @@ terraform plan
 
 - $env:TF_VAR_telegram_token_param_name = "<telegram_token_param_name>"
 - $env:TF_VAR_telegram_default_chat_id  = "<telegram_chat>"
-terraform apply
+- terraform apply
 
 # Test
 
@@ -49,4 +49,5 @@ terraform apply
 # Cleanup
 
 terraform destroy
+
 
