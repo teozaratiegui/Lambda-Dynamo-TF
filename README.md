@@ -38,7 +38,7 @@ terraform plan
 
 - Get the lambda arn: aws lambda get-function --function-name demo-autoinc-dev-<workspace_name>-writer --query 'Configuration.FunctionArn'  --output text
 
-- Save the json message: '{"text":"Prueba pasar token a parameter store y no secrets"}' | Out-File -FilePath payload.json -Encoding ascii -NoNewline
+- Save the json message: '{"text":"test message"}' | Out-File -FilePath payload.json -Encoding ascii -NoNewline
 
 - Store the lambda arn:  $Fn = "<lambda_arn>"
 
@@ -49,5 +49,6 @@ terraform plan
 # Cleanup
 
 terraform destroy
+
 
 
