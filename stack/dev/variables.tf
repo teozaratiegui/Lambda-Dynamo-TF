@@ -7,7 +7,7 @@ variable "env" {
 
 variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  default = "sa-east-1"
 }
 
 variable "aws_profile" {
@@ -29,14 +29,13 @@ locals {
   }
 }
 
-variable "telegram_token_secret_arn" {
+variable "telegram_token_param_name" {
   type        = string
   sensitive   = true
-  description = "ARN of the Secrets Manager secret with the Telegram bot token"
+  description = "SSM SecureString parameter name for the Telegram bot token (e.g., /telegram/bot-token)"
 }
 
 variable "telegram_default_chat_id" {
   type        = string
   description = "Optional default chat id for CLI tests"
-  default     = "6656805658"
 }

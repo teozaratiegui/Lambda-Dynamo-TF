@@ -33,9 +33,11 @@ data "aws_iam_policy_document" "inline" {
 
   # Permiso para leer el secreto del token de Telegram
   statement {
-    sid       = "ReadTelegramTokenSecret"
-    actions   = ["secretsmanager:GetSecretValue"]
-    resources = [var.telegram_token_secret_arn]
+    sid       = "ReadTelegramTokenFromSSM"
+    actions   = ["ssm:GetParameter"]
+    resources = [
+      "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter${var.telegram_token_param_name}"
+    ]
   }
 
 }
@@ -62,6 +64,7 @@ resource "aws_lambda_function" "this" {
   handler       = var.handler
   runtime       = var.runtime
   filename      = data.archive_file.zip.output_path
+  timeout = 10
 
   # Agrego esto para  forzar la actualización cuando cambie el código fuente
   source_code_hash = data.archive_file.zip.output_base64sha256
@@ -70,11 +73,10 @@ resource "aws_lambda_function" "this" {
   environment {
     variables = {
       TABLE_NAME                = var.table_name
-      TELEGRAM_TOKEN_SECRET_ARN = var.telegram_token_secret_arn # << new
-      TELEGRAM_DEFAULT_CHAT_ID  = var.telegram_default_chat_id  # << optional
+      TELEGRAM_TOKEN_PARAM      = var.telegram_token_param_name   # <-- rename key here
+      TELEGRAM_DEFAULT_CHAT_ID  = var.telegram_default_chat_id
     }
   }
-
 
   publish = true # Publica una nueva versión cada vez que cambia el código, favorece rollbacks y aliases
 }

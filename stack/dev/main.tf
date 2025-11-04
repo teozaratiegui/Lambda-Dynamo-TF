@@ -22,6 +22,8 @@ module "writer" {
   table_name = module.ddb.table_name
   table_arn  = module.ddb.table_arn
 
-  telegram_token_secret_arn = var.telegram_token_secret_arn # from tfvars or env
+  telegram_token_param_name = var.telegram_token_param_name # from tfvars or env
   telegram_default_chat_id  = var.telegram_default_chat_id  # optional
+  aws_region = var.aws_region
+  
 }
