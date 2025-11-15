@@ -29,8 +29,8 @@ terraform init
 terraform plan
 
 ## Apply with environment variables (PowerShell)
-
-- $env:TF_VAR_telegram_token_param_name = "<telegram_token_param_name>"
+- aws ssm put-parameter --name "/telegram/bot-token" --type "SecureString"  --value "<your-bot-token>"  --region sa-east-1
+- $env:TF_VAR_telegram_token_param_name = "/telegram/bot-token"
 - $env:TF_VAR_telegram_default_chat_id  = "<telegram_chat>"
 - terraform apply
 
@@ -49,6 +49,7 @@ terraform plan
 # Cleanup
 
 terraform destroy
+
 
 
 
